@@ -158,7 +158,7 @@ public class Binary implements Comparable {
 	if (this == other) {
 	    return true;
 	}
-	if (this._binNum == ((Binary)other).getDecNum()) {
+	if (this._decNum == ((Binary)other).getDecNum()) {
 	    return true;
 	}
 	else {return false;}
@@ -173,13 +173,34 @@ public class Binary implements Comparable {
       =============================================*/
     public int compareTo( Object other ) {
 	if (other instanceof Comparable) {
-	    if (this.equals((Binary)other)) {
-		return 0;
+	    if (other instanceof Hexadecimal) {
+		if (this.equals((Hexadecimal)other)) {
+		    return 0;
+		}
+		if (this._decNum > ((Hexadecimal)other).getDecNum()) {
+		    return 1;
+		}
+		else {return -1;}
 	    }
-	    if (this._decNum > ((Binary)other).getDecNum()) {
-		return 1;
+	    else if (other instanceof Rational) {
+		Rational r = new Rational(this.getDecNum()*((Rational)other).getDenominator(),((Rational)other).getDenominator());
+		if (r.getNumerator() > ((Rational)other).getNumerator()) {
+		    return 1;
+		}
+		else if (r.getNumerator() == ((Rational)other).getNumerator()) {
+		    return 0;
+		}
+		else {return -1;}
 	    }
-	    else {return -1;}
+	    else {
+		if (this.equals((Binary)other)) {
+		    return 0;
+		}
+		if (this._decNum > ((Binary)other).getDecNum()) {
+		    return 1;
+		}
+		else {return -1;}		
+	    }
 	}
 	else if (! (other instanceof Comparable)) {
 	    throw new ClassCastException("\ncompareTo() input not comparable\n");

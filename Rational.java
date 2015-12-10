@@ -36,17 +36,36 @@ public class Rational implements Comparable{
 	    denominator = 1;
 	}
     }//end constructor
+
+    public Rational(Binary c) {
+    //if an invalid denominator is attempted, should print a message and set the number to 0/1
+	denominator = 1;
+	numerator = c.getDecNum();
+    }//end constructor
+
+    public Rational(Hexadecimal c) {
+    //if an invalid denominator is attempted, should print a message and set the number to 0/1
+	denominator = 1;
+	numerator = c.getDecNum();
+    }//end constructor        
   
   /*=====Methods=====*/
   
-  public boolean equals(Rational r){
+    public boolean equals( Object other ) { 
+	if (this == other) {
+	    return true;
+	}
+	if (other instanceof Rational) {
+	    Rational q = this.normalize((Rational)other)[0];
+	    Rational y = this.normalize((Rational)other)[1];
+	    if (q.getNumerator() == y.getNumerator()) {
+		return true;
+	    }
+	    else {return false;}
+	}
+	else {return false;}
+    }
 
-      if (this.compareTo(r) == 0) {
-        return true;
-      }
-      
-      return false;
-  }
   
   public String toString(){
     //returns a string representation of the rational number (formatting of your choice)
@@ -135,15 +154,35 @@ public class Rational implements Comparable{
     // Returns a negative integer if the calling number is smaller than the parameter
     public int compareTo(Object other){
 	if (other instanceof Comparable) {
-	    Rational q = this.normalize((Rational)other)[0];
-	    Rational y = this.normalize((Rational)other)[1];
-	    //either one has a bigger denominator or they have the same denominator but differnet numerators or 
-	    if (q.numerator > y.numerator){
-		return 1;}
-	    else if (q.numerator < y.numerator){
-		return -1;}
+	    if (other instanceof Rational) {
+		Rational q = this.normalize((Rational)other)[0];
+		Rational y = this.normalize((Rational)other)[1];
+		//either one has a bigger denominator or they have the same denominator but differnet numerators or 
+		if (q.numerator > y.numerator){
+		    return 1;}
+		else if (q.numerator < y.numerator){
+		    return -1;}
+		else {
+		    return 0;
+		}
+	    }
+	    else if (other instanceof Binary) {
+		Rational r = new Rational((Binary)other); //other number
+		Rational temp1 = this.normalize((Rational)r)[0];
+		Rational temp2 = this.normalize((Rational)r)[1];
+		if (temp1.numerator > temp2.numerator){
+		    return 1;}
+		else if (temp1.numerator < temp2.numerator){return -1;}
+		else {return 0;}		
+	    }
 	    else {
-	      return 0;
+		Rational r = new Rational((Hexadecimal)other); //other number
+		Rational temp1 = this.normalize((Rational)r)[0];
+		Rational temp2 = this.normalize((Rational)r)[1];
+		if (temp1.numerator > temp2.numerator){
+		    return 1;}
+		else if (temp1.numerator < temp2.numerator){return -1;}
+		else {return 0;}		
 	    }
 	}
 	else if (! (other instanceof Comparable)) {

@@ -19,11 +19,11 @@
  *  remove item (while maintaining "left-justification")
  *****************************/
 
-public class SuperArray implements ListInt{
+public class SuperArray{
  
     //~~~~~INSTANCE VARS~~~~~
     //underlying container, or "core" of this data structure:
-    private int[] _data;
+    private Comparable[] _data;
 
     //position of last meaningful value
     private int _lastPos;
@@ -36,7 +36,7 @@ public class SuperArray implements ListInt{
     //default constructor – initializes 10-item array
     public SuperArray() 
     { 
-	_data = new int[10];
+	_data = new Comparable[10];
 	_lastPos = -1; //flag to indicate no lastpos yet
 	_size = 0;	
     }
@@ -61,7 +61,7 @@ public class SuperArray implements ListInt{
     //double capacity of this SuperArray
     private void expand() 
     { 
-	int[] temp = new int[ _data.length * 2 ];
+	Comparable[] temp = new Comparable[ _data.length * 2 ];
 	for( int i = 0; i < _data.length; i++ )
 	    temp[i] = _data[i];
 	_data = temp;
@@ -69,14 +69,14 @@ public class SuperArray implements ListInt{
 
 		
     //accessor -- return value at specified index
-    public int get( int index ) { return _data[index]; }
+    public Comparable get( int index ) { return _data[index]; }
 
 		
     //mutator -- set value at index to newVal, 
     //           return old value at index
-    public int set( int index, int newVal ) 
+    public Comparable set( int index, Comparable newVal ) 
     { 
- 	int temp = _data[index];
+ 	Comparable temp = _data[index];
 	_data[index] = newVal;
 	return temp;
     }
@@ -84,7 +84,7 @@ public class SuperArray implements ListInt{
 
     // ~~~~~~~~~~~~~~ PHASE II ~~~~~~~~~~~~~~
     //adds an item after the last item
-    public void add( int newVal ) {
+    public void add( Comparable newVal ) {
         _size += 1;
         _lastPos += 1;
         if(_size>_data.length)
@@ -95,7 +95,7 @@ public class SuperArray implements ListInt{
 
     //inserts an item at index
     //shifts existing elements to the right
-    public void add( int index, int newVal ) { 
+    public void add( int index, Comparable newVal ) { 
         _size += 1;
         _lastPos += 1;
         
@@ -126,6 +126,23 @@ public class SuperArray implements ListInt{
     public int size() { 
         return _size;
     }
+
+    //int linSearch, does a linear search for Comparable input c and returns its index
+
+    public int linSearch(Comparable c) {
+	for (int i = 0; i < _data.length; i++) {
+	    if (_data[i].equals(c)) {
+		return i;
+	    }
+	}
+	return -1;
+    }
+
+    public boolean isSorted() {
+	
+    }
+
+    //isSorted finds out whether the SuperArray is sorted in ascending order
 
     //main method for testing
     public static void main( String[] args ) 
