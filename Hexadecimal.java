@@ -15,8 +15,6 @@ public class Hexadecimal implements Comparable {
     public int getDecNum(){
 	return _decNum;
     }
-
-    
  
     public Hexadecimal(){
 	_decNum = 0;
@@ -31,7 +29,11 @@ public class Hexadecimal implements Comparable {
     public Hexadecimal(String s){
 	_decNum = hexToDec(s);
 	_hexNum = s;
-    }	
+    }
+
+    public String toString() {
+	return _hexNum;
+    }
 	
 	
     public static int hexToDec(String str){

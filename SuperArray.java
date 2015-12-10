@@ -139,7 +139,12 @@ public class SuperArray{
     }
 
     public boolean isSorted() {
-	
+	for (int i = 0; i < _data.length; i++) {
+	    if (_data[i].compareTo(_data[i+1]) != 1) {
+		return false;
+	    }
+	}
+	return true;
     }
 
     //isSorted finds out whether the SuperArray is sorted in ascending order
@@ -147,12 +152,14 @@ public class SuperArray{
     //main method for testing
     public static void main( String[] args ) 
     {
+
 	SuperArray curtis = new SuperArray();
 	System.out.println("Printing empty SuperArray curtis...");
 	System.out.println(curtis);
 
+
 	for( int i = 0; i < curtis._data.length; i++ ) {
-	    curtis.set(i,i*2);
+	    curtis.set(i,new Rational(i*2,1));
 	    curtis._size++; //necessary bc no add() method yet
 	}
 
@@ -173,14 +180,15 @@ public class SuperArray{
 	System.out.println("Printing empty SuperArray mayfield...");
 	System.out.println(mayfield);
 
-	  mayfield.add(5);
-	  mayfield.add(4);
-	  mayfield.add(3);
-	  mayfield.add(2);
-	  mayfield.add(1);
+	 mayfield.add(new Binary(4));
+	 mayfield.add(new Binary("11101"));
+	 mayfield.add(new Hexadecimal(2000));
+	 mayfield.add(new Hexadecimal("7CE"));
+	 mayfield.add(new Rational(9,2));
 
-	  System.out.println("Printing populated SuperArray mayfield...");
-	  System.out.println(mayfield);
+	 System.out.println("Printing populated SuperArray mayfield...");
+	 System.out.println(mayfield);
+
 
 	  mayfield.remove(3);
 	  System.out.println("Printing SuperArray mayfield post-remove...");
@@ -189,15 +197,17 @@ public class SuperArray{
 	  System.out.println("Printing SuperArray mayfield post-remove...");
 	  System.out.println(mayfield);
 
-	  mayfield.add(3,99);
+	  mayfield.add(3,new Rational(42,3));
 	  System.out.println("Printing SuperArray mayfield post-insert...");
 	  System.out.println(mayfield);
-	  mayfield.add(2,88);
+	  mayfield.add(2,new Binary("111110"));
 	  System.out.println("Printing SuperArray mayfield post-insert...");
 	  System.out.println(mayfield);
-	  mayfield.add(1,77);
+	  mayfield.add(1,new Hexadecimal(40000));
 	  System.out.println("Printing SuperArray mayfield post-insert...");
 	  System.out.println(mayfield);
+	/*-----------------------------------
+	  --------------------------------*/
 
     }//end main
 		

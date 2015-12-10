@@ -69,16 +69,14 @@ public class Binary implements Comparable {
       decToBin(14) -> "1110"
       =====================================*/
     public static String decToBin( int n ) {
-	String bin = "";
-	int temp = n;
-	if (temp == 0) {
-	    bin += 0;
-	    return bin;
+	String ans = "";
+	int temp = 0;
+	while(n > 0){
+		temp =  n%2;
+		n = n/2;
+		ans = "" + temp + ans;
 	}
-	while (temp > 0) {
-	    bin += temp%2; //divide by 2 algo for conversion
-	}
-	return bin;
+	return ans;
     }
 
 
@@ -93,10 +91,8 @@ public class Binary implements Comparable {
       decToBinR(14) -> "1110"
       =====================================*/
     public static String decToBinR( int n ) {
-	if (n < 2) {
-	    return n + "";
-	}
-	return decToBinR(n/2) + decToBinR(n%2);
+	if(n==0) return "";
+	return decToBinR(n/2) + n%2; 	
     }
 
 
@@ -112,17 +108,15 @@ public class Binary implements Comparable {
       binToDec("1110") -> 14
       =====================================*/
     public static int binToDec( String s ) {
-	int dec = 0;
-	int power = 0;
-	int binary = Integer.parseInt(s);
-
-	while (binary != 0) {
-	    int last = binary % 10;
-	    dec += last * Math.pow(2, power);
-	    power++;
-	    binary = binary / 10;
+    	int temp = Integer.parseInt(s);
+	int n = 0;
+	int ans = 0;
+	while(temp > 0){
+		ans += (temp%10)*Math.pow(2,n);
+		temp = temp/10;
+		n += 1;
 	}
-	return dec;
+	return ans;
     }
 
 
@@ -138,13 +132,9 @@ public class Binary implements Comparable {
       binToDecR("1110") -> 14
       =====================================*/
     public static int binToDecR( String s ) { 
-	int length = s.length();
-	if (length == 0) {
-	    return 0;
-	}
-	String num1 = s.substring(0,1);
-	String rest = s.substring(1);
-	return Integer.parseInt(num1)*(int)Math.pow(2,length-1) + binToDecR(rest);
+	int temp = Integer.parseInt(s);
+	if(temp == 0) return 0;
+	return 2*binToDecR("" + temp/10) + (temp)%10;
     }
 
 
