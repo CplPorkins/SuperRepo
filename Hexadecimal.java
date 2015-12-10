@@ -79,7 +79,7 @@ public class Hexadecimal implements Comparable {
 
 
     public int compareTo( Object other ) {
-	if (other instanceof Hexadecimal) {
+	if (other instanceof Comparable) {
 	    if (this.equals((Hexadecimal)other)) {
 		return 0;
 	    }
@@ -88,10 +88,12 @@ public class Hexadecimal implements Comparable {
 	    }
 	    else {return -1;}
 	}
-	else {return -1;}
-    }
-
-    
+	else if (! (other instanceof Comparable)) {
+	    throw new ClassCastException("\ncompareTo() input not comparable\n");
+	}
+	throw new NullPointerException("\ncompareTo() input is null\n");
+    }	
+	
     public static void main(String [] args){
 	System.out.println(Hexadecimal.hexToDec("2E6"));
 	System.out.println(Hexadecimal.hexToDecR("2E6"));

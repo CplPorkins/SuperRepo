@@ -134,7 +134,7 @@ public class Rational implements Comparable{
     // Returns a positive integer if the calling number is larger than the parameter
     // Returns a negative integer if the calling number is smaller than the parameter
     public int compareTo(Object other){
-	if (other instanceof Rational) {
+	if (other instanceof Comparable) {
 	    Rational q = this.normalize((Rational)other)[0];
 	    Rational y = this.normalize((Rational)other)[1];
 	    //either one has a bigger denominator or they have the same denominator but differnet numerators or 
@@ -146,10 +146,11 @@ public class Rational implements Comparable{
 	      return 0;
 	    }
 	}
-	else {
-	    return -1;
+	else if (! (other instanceof Comparable)) {
+	    throw new ClassCastException("\ncompareTo() input not comparable\n");
 	}
-    }
+	throw new NullPointerException("\ncompareTo() input is null\n");
+    }	        
     
     public Rational[] normalize(Rational r){
         int cm = (int)(this.denominator*r.denominator);

@@ -172,7 +172,7 @@ public class Binary implements Comparable {
       negative integer if this<input, positive integer otherwise
       =============================================*/
     public int compareTo( Object other ) {
-	if (other instanceof Binary) {
+	if (other instanceof Comparable) {
 	    if (this.equals((Binary)other)) {
 		return 0;
 	    }
@@ -181,7 +181,10 @@ public class Binary implements Comparable {
 	    }
 	    else {return -1;}
 	}
-	else {return -1;}
+	else if (! (other instanceof Comparable)) {
+	    throw new ClassCastException("\ncompareTo() input not comparable\n");
+	}
+	throw new NullPointerException("\ncompareTo() input is null\n");
     }
 
 
