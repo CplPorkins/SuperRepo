@@ -40,12 +40,7 @@ public class Rational implements Comparable{
   /*=====Methods=====*/
   
   public boolean equals(Rational r){
-    /*
-      if (r.numerator == this.numerator && r.denominator == this.denominator) {
-        return true;
-      }
-      */
-      
+
       if (this.compareTo(r) == 0) {
         return true;
       }
@@ -140,8 +135,8 @@ public class Rational implements Comparable{
     // Returns a negative integer if the calling number is smaller than the parameter
     public int compareTo(Object other){
 	if (other instanceof Rational) {
-	    Rational q = this.normalize(other)[0];
-	    Rational y= this.normalize(other)[1];
+	    Rational q = this.normalize((Rational)other)[0];
+	    Rational y = this.normalize((Rational)other)[1];
 	    //either one has a bigger denominator or they have the same denominator but differnet numerators or 
 	    if (q.numerator > y.numerator){
 		return 1;}
@@ -152,7 +147,7 @@ public class Rational implements Comparable{
 	    }
 	}
 	else {
-	    return 0;
+	    return -1;
 	}
     }
     

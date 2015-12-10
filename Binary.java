@@ -4,10 +4,15 @@
 //2015-12-08
 //skeleton file for class Binary
 
-public class Binary {
+public class Binary implements Comparable {
 
     private int _decNum;
     private String _binNum;
+
+    //accessors
+    public int getDecNum() {
+	return _decNum;
+    }
 
 
     /*=====================================
@@ -153,7 +158,7 @@ public class Binary {
 	if (this == other) {
 	    return true;
 	}
-	if (this._binNum == ((Binary)other)._binNum) {
+	if (this._binNum == ((Binary)other).getDecNum()) {
 	    return true;
 	}
 	else {return false;}
@@ -171,7 +176,7 @@ public class Binary {
 	    if (this.equals((Binary)other)) {
 		return 0;
 	    }
-	    if (this._decNum > ((Binary)other)._decNum) {
+	    if (this._decNum > ((Binary)other).getDecNum()) {
 		return 1;
 	    }
 	    else {return -1;}
